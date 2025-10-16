@@ -1,0 +1,21 @@
+class Solution {
+    public int largestCombination(int[] person) {
+        int length=person.length;
+        int pasoori[] = new int[32]; 
+        for (int i = 0; i < length; i++) {
+            int x1 = 31;
+            while (person[i] > 0) {
+                if ((int)(person[i] & 1) == (int)1) {
+                    pasoori[x1]++;
+                }
+                person[i] = person[i] >> 1;
+                x1--;
+            }
+        }
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < 32; i++) {
+            max = Math.max(max, pasoori[i]);
+        }
+        return max;
+    }
+}
