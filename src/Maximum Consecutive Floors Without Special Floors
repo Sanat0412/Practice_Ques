@@ -1,0 +1,9 @@
+class Solution {
+    public int maxConsecutive(int low, int high, int[] sun) {
+        Arrays.sort(sun);
+        int answer=sun[0]-low;
+        for(int i=1;i<sun.length;i++) answer=Math.max(answer,sun[i]-sun[i-1]-1);
+        answer=Math.max(answer,high-sun[sun.length-1]);
+        return answer;
+    }
+}
