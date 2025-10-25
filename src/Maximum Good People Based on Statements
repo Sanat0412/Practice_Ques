@@ -1,0 +1,32 @@
+class Solution {
+    public int maximumGood(int[][] sts) {
+        int n = sts.length;
+        int ans = 0;
+        for (int i = 0; i < (1<<n); ++i) {
+            int ct = 0;
+            boolean[] isGood = new boolean[n];
+            for (int j = 0; j < n; ++j) {
+                isGood[j] = (i&(1<<j))>0;
+                if (isGood[j])
+                    ++ct;
+            }
+            if (ct<=ans)
+                continue;
+            boolean poss = true;
+            for (int j = 0; j < n; ++j) {
+                if (!isGood[j])
+                    continue;
+                for (int k = 0; k < n; ++k) {
+                    if (sts[j][k]==1&&!isGood[k]) {
+                        poss=false;
+                    } else if (sts[j][k]==0&&isGood[k]) {
+                        poss=false;
+                    }
+                }
+            }
+            if (poss)
+                ans = ct;
+        }
+        return ans;
+    }
+}
