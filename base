@@ -1,0 +1,16 @@
+class Solution {
+    public static int calPoints(String[] ops) {
+        int i = 0;
+        ArrayList<Integer> arr=new ArrayList<>();
+        for (int j = 0; j < ops.length; j++) {
+            char ch= ops[j].charAt(0);
+            if(ops[j].charAt(0)!='C' && ops[j].charAt(0)!='D' && ops[j].charAt(0)!='+') arr.add(Integer.parseInt(ops[j]));
+            if(ops[j].charAt(0)=='C') arr.remove(arr.size()-1);
+            else if(ops[j].charAt(0)=='D') arr.add(2*arr.get(arr.size()-1));
+            else if(ops[j].charAt(0)=='+') arr.add((arr.get((arr.size()-1))+arr.get((arr.size()-2))));
+        }
+        int sum=0;
+        for(int i1:arr) sum+=i1;
+        return sum;
+    }
+}
